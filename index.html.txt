@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulário de Cadastro</title>
+</head>
+<body>
+    <h1>Cadastro</h1>
+    <form id="meuFormulario">
+        <label for="nome">Nome:</label><br>
+        <input type="text" id="nome" name="nome"><br><br>
+
+        <label for="cpf">CPF:</label><br>
+        <input type="text" id="cpf" name="cpf"><br><br>
+
+        <label for="matricula">Matrícula:</label><br>
+        <input type="text" id="matricula" name="matricula"><br><br>
+
+        <label for="codigoSecretaria">Código da Secretaria:</label><br>
+        <input type="text" id="codigoSecretaria" name="codigoSecretaria"><br><br>
+
+        <label for="viaCartao">Via do Cartão:</label><br>
+        <input type="text" id="viaCartao" name="viaCartao"><br><br>
+
+        <button type="button" onclick="enviarFormulario()">Enviar</button>
+    </form>
+    <script>
+    function enviarFormulario() {
+        var nome = document.getElementById("nome").value;
+        var cpf = document.getElementById("cpf").value;
+        var matricula = document.getElementById("matricula").value;
+        var codigoSecretaria = document.getElementById("codigoSecretaria").value;
+        var viaCartao = document.getElementById("viaCartao").value;
+
+        var url = "https://script.google.com/a/macros/recife.pe.gov.br/s/AKfycbw3MA7I36GNVkI2fmhEXf_IM5gjNNwjFHz0YxO9ISXRL-3rjidN5GQjTeNrLla5MQ_Ftg/exec"; // Substitua pelo URL do seu aplicativo da web
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `nome=${nome}&cpf=${cpf}&matricula=${matricula}&codigoSecretaria=${codigoSecretaria}&viaCartao=${viaCartao}`,
+        })
+            .then((response) => response.text())
+            .then((data) => {
+                alert(data);
+                document.getElementById('meuFormulario').reset();
+            })
+            .catch((error) => {
+                console.error('Erro:', error);
+            });
+    }
+    </script>
+</body>
+</html>
